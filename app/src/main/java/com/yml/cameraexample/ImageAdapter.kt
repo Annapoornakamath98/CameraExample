@@ -2,12 +2,16 @@ package com.yml.cameraexample
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-class AdapterClass(private val context: Context, private val uList: MutableList<Any>) : RecyclerView.Adapter<AdapterClass.ResponseViewHolder>() {
+import com.bumptech.glide.Glide
+
+class ImageAdapter(private val context: Context, private val uList: List<Any>) : RecyclerView.Adapter<ImageAdapter.ResponseViewHolder>() {
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
@@ -21,7 +25,11 @@ class AdapterClass(private val context: Context, private val uList: MutableList<
     }
 
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
-        holder.responseItemView.setImageBitmap(uList[position] as Bitmap)
+//        val uri: Uri = Uri.parse(uList.size.toString())
+        //holder.responseItemView.setImageResource(uList[position] as Int)
+        Glide.with(context)
+                .load(uList[position])
+                .into(holder.responseItemView)
     }
 
     override fun getItemCount(): Int {

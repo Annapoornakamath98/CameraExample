@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,GalleryActivity::class.java))
 
         }
-        showBtn.setOnClickListener {
-            display()
-        }
+//        showBtn.setOnClickListener {
+//            display()
+//        }
     }
 
     private fun openCamera() {
@@ -124,21 +124,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
-    private fun display(){
-//        val intent = Intent(Intent.ACTION_PICK,
-//            photoURI?.let { MediaStore.getDocumentUri(this, it) })
-//        startActivityForResult(intent,44)
-        val files: Array<String> = applicationContext.fileList()
-        var str = ""
-        for (f in files){
-           str = str + " " + f
-
-        }
-        Toast.makeText(applicationContext,files.toString(),Toast.LENGTH_LONG).show()
-        tv.text = str
-       // tv.text = files.toString()
-        //tv.text = files.toString()
-        //recycler.adapter = imageList?.let { ImageAdapter(this, it) }
-    }
+//    private fun display(){
+////        val intent = Intent(Intent.ACTION_PICK,
+////            photoURI?.let { MediaStore.getDocumentUri(this, it) })
+////        startActivityForResult(intent,44)
+//        val files: Array<String> = applicationContext.fileList()
+//        var str = ""
+//        for (f in files){
+//           str = str + " " + f
+//
+//        }
+//        Toast.makeText(applicationContext,files.toString(),Toast.LENGTH_LONG).show()
+//        tv.text = str
+//       // tv.text = files.toString()
+//        //tv.text = files.toString()
+//        //recycler.adapter = imageList?.let { ImageAdapter(this, it) }
+//    }
 
 }

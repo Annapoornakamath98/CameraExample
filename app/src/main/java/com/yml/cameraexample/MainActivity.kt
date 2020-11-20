@@ -21,10 +21,11 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 var imageList: MutableList<Any>? = null
 var photoURI: Uri? = null
 private lateinit var click: Button
-private lateinit var tv :TextView
+private lateinit var tv: TextView
 private lateinit var disp: Button
 private lateinit var image: ImageView
 private lateinit var showBtn: Button
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         click = findViewById(R.id.btnClick)
         image = findViewById(R.id.imageView)
-        disp=findViewById(R.id.btnDisplay)
+        disp = findViewById(R.id.btnDisplay)
         //tv = findViewById(R.id.textv)
         showBtn = findViewById(R.id.btnShow)
         recycler = findViewById(R.id.recyclerView)
@@ -47,10 +48,10 @@ class MainActivity : AppCompatActivity() {
             openCamera()
         }
         disp.setOnClickListener {
-            startActivity(Intent(this,GalleryActivity::class.java))
+            startActivity(Intent(this, GalleryActivity::class.java))
         }
         showBtn.setOnClickListener {
-           display()
+            display()
         }
     }
 
@@ -80,18 +81,13 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 44 && resultCode == RESULT_OK) {
             //val bitmap = data?.extras?.get("data")
-           //image.setImageBitmap(bitmap as Bitmap?)
+            //image.setImageBitmap(bitmap as Bitmap?)
             val bitmap: Bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-           // val imageList: MutableList<Any>? = null
+            // val imageList: MutableList<Any>? = null
             //imageList?.add(currentPhotoPath)
             image.setImageBitmap(bitmap)
             image.setImageURI(photoURI)
             galleryAddPic()
-
-//            if (data != null) {
-//                val imageURI = data.data
-//                image.setImageURI(imageURI)
-//            }
 
         }
     }
@@ -121,15 +117,16 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-    
-    private fun display(){
+
+    private fun display() {
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val singleFile = File(storageDir?.path + "/" + (storageDir?.list()))
-//        val bitmap = BitmapFactory.decodeFile(singleFile.path)
-//        image.setImageBitmap(bitmap)
-         val imageList: MutableList<Any>? = null
+        val singleFile = File(storageDir?.path + "/" + (storageDir?.list()?.get(5)))
+        Toast.makeText(applicationContext, singleFile.toString(), Toast.LENGTH_LONG).show()
+        val bitmap = BitmapFactory.decodeFile(singleFile.path)
+        image.setImageBitmap(bitmap)
+        val imageList: MutableList<Any>? = null
         storageDir?.list()?.let { imageList?.add(it) }
-        recycler.adapter = imageList?.let { ImageAdapter(this, it) }
+//        recycler.adapter = imageList?.let { ImageAdapter(this, it) }
 //        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath())
 //        val singleFile = File(file.path + "/" + file.list()[1])
 //        val bitmap = BitmapFactory.decodeFile(singleFile.path)

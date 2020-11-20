@@ -25,10 +25,10 @@ class ImageAdapter(private val context: Context, private val uList: List<Any>) :
     }
 
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
-        val image = uList[position]
        // holder.responseItemView.setImageResource(uList[position] as Int)
         Glide.with(context)
-                .load(image)
+                .load(uList[position])
+                .placeholder(ContextCompat.getDrawable(context,R.drawable.ic_image_view))
                 .into(holder.responseItemView)
     }
 

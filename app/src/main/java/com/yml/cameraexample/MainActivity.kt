@@ -28,7 +28,7 @@ private lateinit var tv :TextView
 private lateinit var disp: Button
 private lateinit var image: ImageView
 private lateinit var showBtn: Button
-//private lateinit var recycler: RecyclerView
+private lateinit var recycler: RecyclerView
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -40,20 +40,18 @@ class MainActivity : AppCompatActivity() {
         image = findViewById(R.id.imageView)
         disp=findViewById(R.id.btnDisplay)
         //tv = findViewById(R.id.textv)
-        //showBtn = findViewById(R.id.btnShow)
-//        recycler = findViewById(R.id.recyclerView)
-//        recycler.layoutManager = LinearLayoutManager(this)
+        showBtn = findViewById(R.id.btnShow)
+        recycler = findViewById(R.id.recyclerView)
+        recycler.layoutManager = LinearLayoutManager(this)
         click.setOnClickListener {
             openCamera()
-
         }
         disp.setOnClickListener {
             startActivity(Intent(this,GalleryActivity::class.java))
-
         }
-//        showBtn.setOnClickListener {
-//            display()
-//        }
+        showBtn.setOnClickListener {
+           display()
+        }
     }
 
     private fun openCamera() {
@@ -124,21 +122,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
-//    private fun display(){
-////        val intent = Intent(Intent.ACTION_PICK,
-////            photoURI?.let { MediaStore.getDocumentUri(this, it) })
-////        startActivityForResult(intent,44)
-//        val files: Array<String> = applicationContext.fileList()
-//        var str = ""
-//        for (f in files){
-//           str = str + " " + f
-//
-//        }
-//        Toast.makeText(applicationContext,files.toString(),Toast.LENGTH_LONG).show()
-//        tv.text = str
-//       // tv.text = files.toString()
-//        //tv.text = files.toString()
-//        //recycler.adapter = imageList?.let { ImageAdapter(this, it) }
-//    }
+    private fun display(){
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val singleFile = File(storageDir?.path + "/" + (storageDir?.list()))
+//        val bitmap = BitmapFactory.decodeFile(singleFile.path)
+//        image.setImageBitmap(bitmap)
+         val imageList: MutableList<Any>? = null
+        storageDir?.list()?.let { imageList?.add(it) }
+        recycler.adapter = imageList?.let { ImageAdapter(this, it) }
+//        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath())
+//        val singleFile = File(file.path + "/" + file.list()[1])
+//        val bitmap = BitmapFactory.decodeFile(singleFile.path)
+//        image.setImageBitmap(bitmap)
+
+    }
 
 }

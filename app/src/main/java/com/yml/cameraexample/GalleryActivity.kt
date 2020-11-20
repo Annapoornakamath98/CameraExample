@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Button
+import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
@@ -35,7 +37,8 @@ class GalleryActivity : AppCompatActivity() {
                 filePath.add(img.absolutePath)
 
             }
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            //recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = GridLayoutManager(this,2)
             recyclerView.adapter = ImageAdapter(filePath)
 
         }catch (exception: Exception){

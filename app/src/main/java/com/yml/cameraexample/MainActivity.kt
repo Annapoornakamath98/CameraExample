@@ -19,18 +19,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 import java.io.IOException
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 var imageList: MutableList<Any>? = null
 var photoURI: Uri? = null
 private lateinit var click: Button
-private lateinit var tv: TextView
+//private lateinit var tv: TextView
 private lateinit var disp: Button
 private lateinit var image: ImageView
 private lateinit var showBtn: Button
 private lateinit var recycler: RecyclerView
-
+private lateinit var imageDir: File
+private val filePath = mutableListOf<String>()
+lateinit var imageFile : File
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
@@ -40,10 +44,8 @@ class MainActivity : AppCompatActivity() {
         click = findViewById(R.id.btnClick)
         image = findViewById(R.id.imageView)
         disp = findViewById(R.id.btnDisplay)
-        //tv = findViewById(R.id.textv)
         showBtn = findViewById(R.id.btnShow)
         recycler = findViewById(R.id.recyclerView)
-        recycler.layoutManager = LinearLayoutManager(this)
         click.setOnClickListener {
             openCamera()
         }
@@ -119,14 +121,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun display() {
-        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val singleFile = File(storageDir?.path + "/" + (storageDir?.list()?.get(5)))
-        Toast.makeText(applicationContext, singleFile.toString(), Toast.LENGTH_LONG).show()
-        val bitmap = BitmapFactory.decodeFile(singleFile.path)
-        image.setImageBitmap(bitmap)
-        val imageList: MutableList<Any>? = null
-        storageDir?.list()?.let { imageList?.add(it) }
-//        recycler.adapter = imageList?.let { ImageAdapter(this, it) }
+        try{
+            imageDir= File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.path)
+
+            for(i in imageDir.list().indices){
+                imageFile = File(imageDir.path + "/" + imageDir.list()[i])
+                val p = imageFile.path
+                filePath.add(p)
+            }
+            recycler.layoutManager = LinearLayoutManager(this)
+            recycler.adapter = ImageAdapter( filePath)
+
+        }catch (exception: Exception){
+            Toast.makeText(applicationContext,exception.toString(),Toast.LENGTH_LONG).show()
+        }
+
+
+
 //        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath())
 //        val singleFile = File(file.path + "/" + file.list()[1])
 //        val bitmap = BitmapFactory.decodeFile(singleFile.path)

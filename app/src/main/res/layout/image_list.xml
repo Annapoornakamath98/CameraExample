@@ -4,16 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="6dp">
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:padding="8dp">
         <ImageView
             android:id="@+id/images"
-            android:layout_width="386dp"
+            android:layout_width="250dp"
             android:src="@drawable/ic_image_view"
-            android:layout_height="208dp" />
-    </androidx.cardview.widget.CardView>
-
+            android:layout_height="250dp" />
 </LinearLayout>

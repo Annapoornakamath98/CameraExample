@@ -36,10 +36,6 @@
         android:layout_gravity="center"
         android:text="@string/show"
         />
-<!--    <TextView-->
-<!--        android:id="@+id/textv"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
